@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import "./materialize.css";
 import fetchCall from "./actions/fetch_call.tsx";
 
 function App() {
@@ -8,12 +9,14 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    fetchCall("https://jsonplaceholder.typicode.com/users", "GET", null).then(
-      (result: any) => {
-        setContacts(result);
-        setFilteredData(result);
-      }
-    );
+    setTimeout(() => {
+      fetchCall("https://jsonplaceholder.typicode.com/users", "GET", null).then(
+        (result: any) => {
+          setContacts(result);
+          setFilteredData(result);
+        }
+      );
+    }, 3000);
 
     return () => {};
   }, []);
@@ -39,11 +42,12 @@ function App() {
         <>
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="Search your contacts..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <table>
+
+          <table className="centered striped highlight">
             <thead>
               <tr>
                 <th>ID</th>
