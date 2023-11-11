@@ -1,51 +1,71 @@
-
-import  { useEffect, useState } from 'react';
-import "./App.css"; 
+import { useEffect, useState } from "react";
+import "./App.css";
 import fetchCall from "./actions/fetch_call.tsx";
 
 function App() {
-
-
   const [contacts, setContacts] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
-    useEffect(() => {
-      fetchCall(fetch,'https://jsonplaceholder.typicode.com/users','get', null)
-        .then((result:any) => {
-          setContacts(result);
-        });
-  
-      return () => {
-      };
-    }, []);
+  useEffect(() => {
+    fetchCall("https://jsonplaceholder.typicode.com/users", "GET", null).then(
+      (result: any) => {
+        setContacts(result);
+        setFilteredData(result);
+      }
+    );
+
+    return () => {};
+  }, []);
+
+  useEffect(() => {
+    const filtered = contacts.filter((item) =>
+      Object.values(item).some((value: any) =>
+        value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+    setFilteredData(filtered);
+  }, [contacts, searchTerm]);
 
   return (
     <>
-      <table>
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Value</th>
-            <th>Reveal</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+      {contacts && contacts.length === 0 && (
+        <div className="spinner">
+          <div className="double-bounce1"></div>
+          <div className="double-bounce2"></div>
+        </div>
+      )}
+      {contacts && contacts.length > 0 && (
+        <>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+              </tr>
+            </thead>
 
-        <tbody>
-        {contacts.map((contact: any) => (
-          <tr key={contact.id}>
-            <td>{contact.id}</td>
-            <td>{contact.name}</td>
-            <td>{contact.username}</td>
-            <td>{contact.email}</td>
-          </tr>
-        ))}
-        </tbody>
-      </table>
-
-      {/* <div className="spinner">
-  <div className="double-bounce1"></div>
-  <div className="double-bounce2"></div>
-</div> */}
+            <tbody>
+              {filteredData.map((contact: any) => (
+                <tr key={contact.id}>
+                  <td>{contact.id}</td>
+                  <td>{contact.name}</td>
+                  <td>{contact.username}</td>
+                  <td>{contact.email}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      )}
     </>
   );
 }

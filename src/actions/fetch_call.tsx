@@ -1,5 +1,4 @@
 export default (
-    fetch: any,
     path: string,
     method: string,
     payload: any,
