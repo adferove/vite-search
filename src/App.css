@@ -82,3 +82,30 @@
     -webkit-transform: scale(1.0);
   }
 }
+
+/* CSS by me */
+.link-style {
+  color: #007bff; /* Link color, adjust as needed */
+  text-decoration: underline; /* Underline the text to indicate a link */
+  cursor: pointer; /* Set cursor to pointer to indicate interactivity */
+}
+
+.contact-details {
+  text-align: left; /* Align the content to the left */
+  padding: 20px; /* Add padding for spacing */
+}
+
+.contact-details ul {
+  list-style: none; /* Remove default list styles */
+  padding: 0;
+}
+
+.contact-details li {
+  margin-bottom: 10px; /* Add margin between list items */
+}
+
+.gb-color {
+  background-color: #007bff;
+  color: #fff;
+}
+

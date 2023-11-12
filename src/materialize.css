@@ -2905,7 +2905,7 @@
   }
   
   table.centered thead tr th, table.centered tbody tr td {
-    text-align: center;
+    text-align: left;
   }
   
   tr {
