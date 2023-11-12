@@ -7,7 +7,7 @@ function App() {
   const [contacts, setContacts] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedContact, setSelectedContact] = useState(null);
+  const [selectedContact, setSelectedContact] = useState<any>(null);
 
   useEffect(() => {
     setTimeout(() => {
@@ -105,27 +105,27 @@ function App() {
         <div className="contact-details">
           <ul>
             <li>
-              <strong>Name:</strong> {selectedContact.name}
+              <strong>Name:</strong> {selectedContact?.name}
             </li>
             <li>
-              <strong>Username:</strong> {selectedContact.username}
+              <strong>Username:</strong> {selectedContact?.username}
             </li>
             <li>
-              <strong>email:</strong> {selectedContact.email}
+              <strong>email:</strong> {selectedContact?.email}
             </li>
             <li>
-              <strong>Phone:</strong> {selectedContact.phone}
+              <strong>Phone:</strong> {selectedContact?.phone}
             </li>
             <li>
-              <strong>Website:</strong> {selectedContact.website}
+              <strong>Website:</strong> {selectedContact?.website}
             </li>
             <li>
-              <strong>Company:</strong> {selectedContact.company?.name}
+              <strong>Company:</strong> {selectedContact?.company?.name}
             </li>
             <li>
-              <strong>Address:</strong> {selectedContact.address?.suite},
-              {selectedContact.address?.street},{selectedContact.address?.city},
-              {selectedContact.address?.zipcode}
+              <strong>Address:</strong> {selectedContact?.address?.suite},
+              {selectedContact?.address?.street},{selectedContact?.address?.city},
+              {selectedContact?.address?.zipcode}
             </li>
           </ul>
           <button className="gb-color" onClick={() => goBack()}>
